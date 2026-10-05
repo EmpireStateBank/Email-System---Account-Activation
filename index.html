@@ -1,679 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email System - Account Activation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conversion Receipt Template</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0b0b0b 0%, #1a1a1a 100%);
-            color: #fff;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    body {
+      background: #f5f5f5;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 30px 0;
-        }
+    .editor-section {
+      background: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        .logo {
-            max-width: 200px;
-            height: auto;
-            margin: 0 auto 20px;
-            display: block;
-        }
+    .editor-section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 24px;
+    }
 
-        .tagline {
-            color: #999;
-            font-size: 14px;
-            letter-spacing: 1px;
-        }
+    .form-group {
+      margin-bottom: 18px;
+    }
 
-        .content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #666;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
 
-        @media (max-width: 900px) {
-            .content {
-                grid-template-columns: 1fr;
-            }
-        }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+      background: #fafafa;
+    }
 
-        .panel {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      background: #fff;
+      border-color: #4d5ed3;
+      box-shadow: 0 0 0 2px rgba(77, 94, 211, 0.1);
+    }
 
-        .panel h2 {
-            color: #d4af37;
-            margin-bottom: 20px;
-            font-size: 20px;
-            letter-spacing: 1px;
-        }
+    .form-group select {
+      cursor: pointer;
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    .actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 30px;
+    }
 
-        label {
-            display: block;
-            color: #d4af37;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
+    .btn {
+      flex: 1;
+      padding: 12px 18px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
 
-        input, textarea, select {
-            width: 100%;
-            padding: 12px 15px;
-            background: #0b0b0b;
-            border: 1px solid #333;
-            border-radius: 6px;
-            color: #fff;
-            font-family: inherit;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
+    .btn-primary {
+      background: #4d5ed3;
+      color: #fff;
+      border-color: #4d5ed3;
+    }
 
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-        }
+    .btn-primary:hover {
+      background: #3d4ec0;
+      border-color: #3d4ec0;
+    }
 
-        button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #d4af37 0%, #c49a27 100%);
-            color: #0b0b0b;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 14px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+      border-color: #ddd;
+    }
 
-        button:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
-        }
+    .btn-secondary:hover {
+      background: #e5e5e5;
+    }
 
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+    .preview-section {
+      display: flex;
+      flex-direction: column;
+    }
 
-        .btn-secondary {
-            background: #333;
-            color: #d4af37;
-            border: 1px solid #d4af37;
-        }
+    .preview-section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 24px;
+    }
 
-        .btn-secondary:hover:not(:disabled) {
-            background: #d4af37;
-            color: #0b0b0b;
-        }
+    .preview-frame {
+      flex: 1;
+      background: #fafaf9;
+      border-radius: 8px;
+      overflow: auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 800px;
+      padding: 30px 20px;
+    }
 
-        .btn-success {
-            background: linear-gradient(135deg, #4a9d4a 0%, #2d7d2d 100%);
-        }
+    .receipt-card {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      background: #fafaf9;
+      border-radius: 10px;
+      overflow: hidden;
+      padding: 24px 22px 20px;
+    }
 
-        .alert {
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 13px;
-            display: none;
-            animation: slideIn 0.3s ease;
-        }
+    .watermark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('./watermark.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 50% auto;
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .alert.show {
-            display: block;
-        }
+    .receipt-content {
+      position: relative;
+      z-index: 1;
+    }
 
-        .alert.success {
-            background: #1a3a1a;
-            border: 1px solid #4a9d4a;
-            color: #7eff7e;
-        }
+    .receipt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
 
-        .alert.error {
-            background: #3a1a1a;
-            border: 1px solid #9d4a4a;
-            color: #ff7e7e;
-        }
+    .receipt-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #000;
+      line-height: 1;
+      letter-spacing: -0.5px;
+      margin: 0;
+    }
 
-        .alert.info {
-            background: #1a2a3a;
-            border: 1px solid #4a7d9d;
-            color: #7eb8ff;
-        }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #999;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
 
-        .alert.warning {
-            background: #3a3a1a;
-            border: 1px solid #9d9d4a;
-            color: #ffff7e;
-        }
+    .amount-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
 
-        .preview-container {
-            border: 2px solid #d4af37;
-            border-radius: 8px;
-            overflow: hidden;
-            max-height: 600px;
-        }
+    .amount-display {
+      font-size: 28px;
+      font-weight: 800;
+      color: #000;
+      line-height: 1;
+      letter-spacing: -0.8px;
+    }
 
-        .preview-label {
-            background: #d4af37;
-            color: #0b0b0b;
-            padding: 12px 15px;
-            font-weight: 600;
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+    .currency-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
 
-        .preview-content {
-            padding: 0;
-            background: #f5f5f5;
-            overflow-y: auto;
-            max-height: 500px;
-        }
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #000;
+      margin: 0 0 14px 0;
+      letter-spacing: -0.3px;
+    }
 
-        .preview-content iframe {
-            width: 100%;
-            height: 500px;
-            border: none;
-            background: #f5f5f5;
-        }
+    .account-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
 
-        .button-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
+    .account-label {
+      flex: 0.45;
+      background: #f0f1ff;
+      border: 1.5px solid #8899ff;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #5566cc;
+      display: flex;
+      align-items: center;
+    }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
-        }
+    .account-value {
+      flex: 0.55;
+      background: #efefef;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 14px;
+      color: #333;
+      display: flex;
+      align-items: center;
+    }
 
-        .stat-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-        }
+    .details-table {
+      position: relative;
+      background: rgba(200, 200, 200, 0.08);
+      border-radius: 14px;
+      padding: 10px 0;
+      margin-top: 8px;
+    }
 
-        .stat-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: #d4af37;
-        }
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
 
-        .stat-label {
-            font-size: 12px;
-            color: #999;
-            margin-top: 8px;
-        }
+    .detail-row:last-child {
+      border-bottom: none;
+    }
 
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 12px;
-            margin-top: 40px;
-            border-top: 1px solid #333;
-        }
+    .detail-label {
+      font-size: 14px;
+      color: #555;
+      font-weight: 500;
+    }
 
-        .divider {
-            height: 1px;
-            background: #333;
-            margin: 20px 0;
-        }
+    .detail-value {
+      font-size: 14px;
+      color: #333;
+      font-weight: 500;
+      text-align: right;
+    }
 
-        .badge {
-            display: inline-block;
-            background: #d4af37;
-            color: #0b0b0b;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            margin-left: 10px;
-        }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      background: #dff3e5;
+      color: #38a95d;
+    }
 
-        .send-mode-warning {
-            background: #2d5a2d;
-            border: 1px solid #4a9d4a;
-            color: #7eff7e;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 12px;
-            line-height: 1.6;
-        }
+    .status-badge.failed {
+      background: #f5dfe2;
+      color: #d04a4a;
+    }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .status-badge.pending {
+      background: #f0e9b8;
+      color: #d0a521;
+    }
 
-        @media (max-width: 600px) {
-            .stats {
-                grid-template-columns: 1fr;
-            }
-            .button-group {
-                grid-template-columns: 1fr;
-            }
-            .logo {
-                max-width: 150px;
-            }
-        }
-    </style>
+    .account-name {
+      color: #4d5ed3;
+      font-weight: 700;
+      text-decoration: underline;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1200px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-frame {
+        min-height: 600px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .editor-section,
+      .preview-section {
+        padding: 20px;
+      }
+
+      .receipt-card {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="./AddText_04-11-12.53.52.png" alt="EmpireStateBank Logo" class="logo">
-            <div class="tagline">Empowering Your Financial Growth | Email System</div>
-        </header>
+  <div class="container">
+    <!-- Editor Section -->
+    <div class="editor-section">
+      <h2>Edit Template</h2>
 
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-value" id="stat-templates">1</div>
-                <div class="stat-label">Email Templates</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="stat-sent">0</div>
-                <div class="stat-label">Emails Sent</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="stat-previews">0</div>
-                <div class="stat-label">Previews Generated</div>
-            </div>
-        </div>
+      <div class="form-group">
+        <label>Conversion Amount</label>
+        <input type="text" id="conversionAmount" value="3.55" placeholder="3.55" />
+      </div>
 
-        <div class="content">
-            <div class="panel">
-                <h2>📧 Email Configuration <span class="badge" id="modeBadge">Preview</span></h2>
+      <div class="form-group">
+        <label>Account Number</label>
+        <input type="text" id="accountNumber" value="8105866469" />
+      </div>
 
-                <div id="alert" class="alert"></div>
+      <div class="form-group">
+        <label>Status</label>
+        <select id="status">
+          <option value="Successful">Successful</option>
+          <option value="Failed">Failed</option>
+          <option value="Pending">Pending</option>
+        </select>
+      </div>
 
-                <div class="form-group">
-                    <label>Mode</label>
-                    <select id="mode" onchange="toggleMode()">
-                        <option value="preview">👁️ Preview & Test</option>
-                        <option value="send">📤 Send Email</option>
-                    </select>
-                </div>
+      <div class="form-group">
+        <label>Amount ($)</label>
+        <input type="text" id="amount" value="3.30" />
+      </div>
 
-                <div id="sendConfigSection" style="display: none;">
-                    <div class="send-mode-warning">
-                        ✅ <strong>Connected to Formspree</strong><br>
-                        Ready to send emails to customers instantly!
-                    </div>
+      <div class="form-group">
+        <label>Total Fee ($)</label>
+        <input type="text" id="fee" value="0.25" />
+      </div>
 
-                    <div class="form-group">
-                        <label>Send To (Customer Email)</label>
-                        <input type="email" id="toEmail" placeholder="customer@example.com">
-                    </div>
-                </div>
+      <div class="form-group">
+        <label>Exchange Rate</label>
+        <input type="text" id="exchangeRate" value="₦1,380" placeholder="₦1,380" />
+      </div>
 
-                <div class="divider"></div>
+      <div class="form-group">
+        <label>Date & Time</label>
+        <input type="text" id="dateTime" value="Jul 05 2026, 12:01PM" />
+      </div>
 
-                <h2>🎯 Email Data</h2>
+      <div class="form-group">
+        <label>Account Name</label>
+        <input type="text" id="accountName" value="Emmanuel Ekpa" />
+      </div>
 
-                <div class="form-group">
-                    <label>Customer Name</label>
-                    <input type="text" id="customerName" placeholder="John Doe" value="John Doe">
-                </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="text" id="phoneNumber" value="+234 803 456 7890" />
+      </div>
 
-                <div class="form-group">
-                    <label>Activation Date</label>
-                    <input type="date" id="activationDate" value="2026-04-28">
-                </div>
-
-                <div class="form-group">
-                    <label>Trade Date</label>
-                    <input type="date" id="tradeDate" value="2026-04-29">
-                </div>
-
-                <div class="button-group">
-                    <button onclick="previewEmail()">👁️ Preview</button>
-                    <button class="btn-secondary" onclick="copyEmailCode()">📋 Copy HTML</button>
-                </div>
-
-                <button onclick="downloadEmail()" style="margin-bottom: 10px;">⬇️ Download HTML</button>
-                
-                <button id="sendBtn" class="btn-success" onclick="sendEmailNow()" style="display: none;">
-                    <span id="sendBtnText">📤 Send Email</span>
-                </button>
-            </div>
-
-            <div class="panel">
-                <h2>👁️ Email Preview</h2>
-                <div class="preview-container">
-                    <div class="preview-label">Email Preview (Gmail-Compatible)</div>
-                    <div class="preview-content">
-                        <iframe id="previewFrame"></iframe>
-                    </div>
-                </div>
-
-                <div class="divider"></div>
-
-                <h2>ℹ️ Features</h2>
-                <div style="font-size: 13px; line-height: 1.8; color: #999;">
-                    <p>✅ <strong>Fully Responsive</strong> - Mobile & desktop</p>
-                    <p>✅ <strong>Gmail Compatible</strong> - Table-based layout</p>
-                    <p>✅ <strong>Production Ready</strong> - Black & gold theme</p>
-                    <p>✅ <strong>Dynamic Placeholders</strong> - Easy customization</p>
-                    <p>✅ <strong>Send Emails</strong> - Integrated with Formspree</p>
-                </div>
-            </div>
-        </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="previewBtn">Preview Update</button>
+        <button class="btn btn-secondary" id="copyBtn">Copy Template</button>
+      </div>
     </div>
 
-    <div class="footer">
-        <p>© 2026 EmpireStateBank | Production-Ready Email System</p>
-        <p style="margin-top: 10px; color: #555;">✅ Preview • 📤 Send • 100% Working</p>
+    <!-- Preview Section -->
+    <div class="preview-section">
+      <h2>Template Preview</h2>
+      <div class="preview-frame" id="previewFrame">
+        <div class="receipt-card" id="receiptCard">
+          <div class="watermark"></div>
+          <div class="receipt-content">
+            <div class="receipt-header">
+              <h1 class="receipt-title">Conversion</h1>
+              <button class="close-btn">×</button>
+            </div>
+
+            <div class="amount-section">
+              <div class="amount-display">−$<span id="previewAmount">3.55</span></div>
+              <div class="currency-text">
+                <span>🇺🇸</span>
+                <span>E-wallet</span>
+                <span style="font-size: 12px;">→</span>
+                <span>🇳🇬</span>
+                <span>NGN</span>
+              </div>
+            </div>
+
+            <h2 class="section-title">Transaction details</h2>
+
+            <div class="account-row">
+              <div class="account-label">Account Number</div>
+              <div class="account-value" id="previewAccountNumber">8105866469</div>
+            </div>
+
+            <div class="details-table">
+              <div class="detail-row">
+                <div class="detail-label">Status</div>
+                <div class="detail-value">
+                  <span class="status-badge" id="previewStatus">Successful</span>
+                </div>
+              </div>
+
+              <div class="detail-row">
+                <div class="detail-label">Amount</div>
+                <div class="detail-value">$<span id="previewAmountValue">3.30</span></div>
+              </div>
+
+              <div class="detail-row">
+                <div class="detail-label">Total fee</div>
+                <div class="detail-value">$<span id="previewFee">0.25</span></div>
+              </div>
+
+              <div class="detail-row">
+                <div class="detail-label">Exchange rate</div>
+                <div class="detail-value">$1 = <span id="previewExchangeRate">₦1,380</span></div>
+              </div>
+
+              <div class="detail-row">
+                <div class="detail-label">Date & Time</div>
+                <div class="detail-value" id="previewDateTime">Jul 05 2026, 12:01PM</div>
+              </div>
+
+              <div class="detail-row">
+                <div class="detail-label">Account Name</div>
+                <div class="detail-value account-name" id="previewAccountName">Emmanuel Ekpa</div>
+              </div>
+
+              <div class="detail-row">
+                <div class="detail-label">Phone Number</div>
+                <div class="detail-value" id="previewPhoneNumber">+234 803 456 7890</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        const emailTemplate = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EmpireStateBank - Account Activated</title>
-</head>
-<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #f5f5f5;">
-        <tr>
-            <td align="center" style="padding: 20px;">
-                <table width="100%" style="max-width: 600px; background-color: #0b0b0b; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden;">
-                    <tr>
-                        <td align="center" style="padding: 40px 20px; background-color: #0b0b0b;">
-                            <img src="./AddText_04-11-12.53.52.png" alt="EmpireStateBank Logo" style="max-width: 160px; height: auto; display: block; margin: 0 auto;">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center" style="padding: 30px 20px 20px; background-color: #0b0b0b;">
-                            <h1 style="margin: 0; font-size: 32px; font-weight: 700; color: #d4af37; letter-spacing: 1px;">Account Activated</h1>
-                            <p style="margin: 8px 0 0 0; font-size: 14px; color: #999; letter-spacing: 0.5px;">Your EmpireStateBank journey begins now</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 30px 20px; background-color: #0b0b0b; color: #ffffff; font-size: 14px; line-height: 1.6;">
-                            <p style="margin: 0 0 20px 0; font-size: 14px;">Dear <strong style="color: #d4af37;">{{CUSTOMER_NAME}}</strong>,</p>
-                            <p style="margin: 0 0 30px 0; font-size: 14px; color: #ccc;">Your EmpireStateBank account has been successfully activated. Welcome to a new era of financial empowerment.</p>
-                            <table width="100%" border="1" cellspacing="0" cellpadding="15" style="background-color: #1a1a1a; border-color: #d4af37; border-radius: 6px; margin-bottom: 20px;">
-                                <tr>
-                                    <td style="color: #d4af37; font-weight: 600; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Activation Date</td>
-                                </tr>
-                                <tr>
-                                    <td style="color: #ffffff; font-size: 18px; font-weight: 700; padding-top: 0;">{{ACTIVATION_DATE}}</td>
-                                </tr>
-                            </table>
-                            <table width="100%" border="1" cellspacing="0" cellpadding="15" style="background-color: #1a1a1a; border-color: #d4af37; border-radius: 6px; margin-bottom: 20px;">
-                                <tr>
-                                    <td>
-                                        <p style="margin: 0 0 12px 0; color: #d4af37; font-weight: 600; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Trading Window</p>
-                                        <p style="margin: 0 0 15px 0; color: #ffffff; font-size: 16px; font-weight: 600;">08:00 UTC – 10:00 UTC</p>
-                                        <p style="margin: 0 0 8px 0; color: #d4af37; font-weight: 600; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Assigned Trade Date</p>
-                                        <p style="margin: 0; color: #ffffff; font-size: 16px; font-weight: 600;">{{TRADE_DATE}}</p>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table width="100%" border="0" cellspacing="0" cellpadding="15" style="background-color: #252525; border-left: 4px solid #d4af37; border-radius: 4px; margin-bottom: 25px;">
-                                <tr>
-                                    <td style="color: #ccc; font-size: 13px; line-height: 1.6;"><strong style="color: #d4af37;">⚠ Important:</strong> Ensure your account is funded before the trading window opens to maximize your opportunities.</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center" style="padding: 0 20px 30px 20px; background-color: #0b0b0b;">
-                            <table border="0" cellspacing="0" cellpadding="0" style="background: linear-gradient(135deg, #d4af37 0%, #c49a27 100%); border-radius: 6px; display: inline-block;">
-                                <tr>
-                                    <td align="center" style="padding: 14px 40px;">
-                                        <a href="https://empirestatebank.github.io/Empire-Virtual---Dashboard/" style="display: block; color: #0b0b0b; font-size: 14px; font-weight: 700; letter-spacing: 0.5px; text-decoration: none; text-transform: uppercase;">View Dashboard</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0 20px; background-color: #0b0b0b;">
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td style="border-top: 1px solid #333; height: 1px;"></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 30px 20px; background-color: #0b0b0b; text-align: center;">
-                            <p style="margin: 0 0 15px 0; font-size: 16px; font-weight: 700; color: #d4af37;">EmpireStateBank</p>
-                            <p style="margin: 0 0 20px 0; font-size: 13px; color: #999;">Empowering Your Financial Growth</p>
-                            <table border="0" cellspacing="0" cellpadding="0" style="display: inline-table; margin-bottom: 20px;">
-                                <tr>
-                                    <td style="padding: 0 10px;"><a href="https://empirestatebank.mssg.me" style="color: #d4af37; font-size: 12px; text-decoration: none;">Visit Website</a></td>
-                                </tr>
-                            </table>
-                            <p style="margin: 0; font-size: 11px; color: #666; line-height: 1.6;">© 2026 EmpireStateBank. All rights reserved.<br>This email contains confidential information intended only for the recipient.</p>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</body>
-</html>`;
+  <script>
+    function updatePreview() {
+      document.getElementById('previewAmount').textContent = document.getElementById('conversionAmount').value;
+      document.getElementById('previewAccountNumber').textContent = document.getElementById('accountNumber').value;
+      document.getElementById('previewAmountValue').textContent = document.getElementById('amount').value;
+      document.getElementById('previewFee').textContent = document.getElementById('fee').value;
+      document.getElementById('previewExchangeRate').textContent = document.getElementById('exchangeRate').value;
+      document.getElementById('previewDateTime').textContent = document.getElementById('dateTime').value;
+      document.getElementById('previewAccountName').textContent = document.getElementById('accountName').value;
+      document.getElementById('previewPhoneNumber').textContent = document.getElementById('phoneNumber').value;
 
-        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xzzeredj';
-        
-        let sentCount = 0;
-        let previewCount = 0;
+      const statusValue = document.getElementById('status').value;
+      const statusBadge = document.getElementById('previewStatus');
+      statusBadge.textContent = statusValue;
+      statusBadge.className = 'status-badge';
+      if (statusValue === 'Failed') {
+        statusBadge.classList.add('failed');
+      } else if (statusValue === 'Pending') {
+        statusBadge.classList.add('pending');
+      }
+    }
 
-        function toggleMode() {
-            const mode = document.getElementById('mode').value;
-            const sendSection = document.getElementById('sendConfigSection');
-            const sendBtn = document.getElementById('sendBtn');
-            const modeBadge = document.getElementById('modeBadge');
-            
-            if (mode === 'send') {
-                sendSection.style.display = 'block';
-                sendBtn.style.display = 'flex';
-                modeBadge.textContent = 'Send Mode';
-                modeBadge.style.background = '#4a9d4a';
-                showAlert('✅ Production mode ready! Enter customer email and send.', 'success');
-            } else {
-                sendSection.style.display = 'none';
-                sendBtn.style.display = 'none';
-                modeBadge.textContent = 'Preview';
-                modeBadge.style.background = '#d4af37';
-            }
-        }
+    document.getElementById('previewBtn').addEventListener('click', updatePreview);
 
-        function showAlert(message, type = 'info') {
-            const alert = document.getElementById('alert');
-            alert.textContent = message;
-            alert.className = `alert show ${type}`;
-            setTimeout(() => alert.classList.remove('show'), 6000);
-        }
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      const receiptHTML = document.getElementById('receiptCard').outerHTML;
+      try {
+        await navigator.clipboard.writeText(receiptHTML);
+        const btn = document.getElementById('copyBtn');
+        const oldText = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = oldText, 2000);
+      } catch (err) {
+        alert('Failed to copy. Please try again.');
+      }
+    });
 
-        function formatDate(dateStr) {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date(dateStr).toLocaleDateString('en-US', options);
-        }
-
-        function generateHTML(data) {
-            let html = emailTemplate;
-            html = html.replace(/{{CUSTOMER_NAME}}/g, data.customerName);
-            html = html.replace(/{{ACTIVATION_DATE}}/g, formatDate(data.activationDate));
-            html = html.replace(/{{TRADE_DATE}}/g, formatDate(data.tradeDate));
-            return html;
-        }
-
-        function previewEmail() {
-            const customerName = document.getElementById('customerName').value;
-            const activationDate = document.getElementById('activationDate').value;
-            const tradeDate = document.getElementById('tradeDate').value;
-
-            if (!customerName || !activationDate || !tradeDate) {
-                showAlert('❌ Please fill in all fields', 'error');
-                return;
-            }
-
-            const html = generateHTML({ customerName, activationDate, tradeDate });
-            const iframe = document.getElementById('previewFrame');
-            iframe.srcdoc = html;
-            previewCount++;
-            document.getElementById('stat-previews').textContent = previewCount;
-            showAlert('✅ Email preview updated!', 'success');
-        }
-
-        function copyEmailCode() {
-            const customerName = document.getElementById('customerName').value;
-            const activationDate = document.getElementById('activationDate').value;
-            const tradeDate = document.getElementById('tradeDate').value;
-
-            if (!customerName || !activationDate || !tradeDate) {
-                showAlert('❌ Please fill in all fields', 'error');
-                return;
-            }
-
-            const html = generateHTML({ customerName, activationDate, tradeDate });
-            navigator.clipboard.writeText(html).then(() => {
-                showAlert('✅ HTML copied to clipboard!', 'success');
-            }).catch(() => {
-                showAlert('❌ Failed to copy.', 'error');
-            });
-        }
-
-        function downloadEmail() {
-            const customerName = document.getElementById('customerName').value;
-            const activationDate = document.getElementById('activationDate').value;
-            const tradeDate = document.getElementById('tradeDate').value;
-
-            if (!customerName || !activationDate || !tradeDate) {
-                showAlert('❌ Please fill in all fields', 'error');
-                return;
-            }
-
-            const html = generateHTML({ customerName, activationDate, tradeDate });
-            const blob = new Blob([html], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'email-template.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            showAlert('✅ Email downloaded!', 'success');
-        }
-
-        async function sendEmailNow() {
-            const customerName = document.getElementById('customerName').value;
-            const activationDate = document.getElementById('activationDate').value;
-            const tradeDate = document.getElementById('tradeDate').value;
-            const toEmail = document.getElementById('toEmail').value;
-
-            if (!customerName || !activationDate || !tradeDate || !toEmail) {
-                showAlert('❌ Please fill in all fields', 'error');
-                return;
-            }
-
-            const sendBtn = document.getElementById('sendBtn');
-            const sendBtnText = document.getElementById('sendBtnText');
-            sendBtn.disabled = true;
-            sendBtnText.textContent = '⏳ Sending...';
-
-            try {
-                const html = generateHTML({ customerName, activationDate, tradeDate });
-                
-                // Create a simple object for Formspree
-                const payload = {
-                    email: toEmail,
-                    name: customerName,
-                    subject: 'Account Activated - EmpireStateBank',
-                    message: `Customer: ${customerName}\nActivation Date: ${formatDate(activationDate)}\nTrade Date: ${formatDate(tradeDate)}`
-                };
-
-                // Send to Formspree with proper headers
-                const response = await fetch(FORMSPREE_ENDPOINT, {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                console.log('Response status:', response.status);
-                const responseData = await response.json();
-                console.log('Response:', responseData);
-
-                if (response.ok) {
-                    showAlert(`✅ Email successfully sent to ${toEmail}!`, 'success');
-                    sentCount++;
-                    document.getElementById('stat-sent').textContent = sentCount;
-                    document.getElementById('toEmail').value = '';
-                } else {
-                    showAlert(`❌ Error: ${responseData.error || 'Unknown error'}`, 'error');
-                }
-            } catch (error) {
-                console.error('Fetch error:', error);
-                showAlert('❌ Failed to send. Please check your connection and try again.', 'error');
-            } finally {
-                sendBtn.disabled = false;
-                sendBtnText.textContent = '📤 Send Email';
-            }
-        }
-
-        window.addEventListener('load', function() {
-            previewEmail();
-        });
-    </script>
+    // Initial preview
+    updatePreview();
+  </script>
 </body>
 </html>
